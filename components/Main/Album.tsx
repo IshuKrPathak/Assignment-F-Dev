@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import { msToTime } from "utils";
 import Head from "next/head";
+import PaginationRanges from "components/Pagination";
 
 interface Props {
   id: string;
@@ -80,6 +81,9 @@ export default function Album({ id }: Props) {
             </div>
           </div>
         ))}
+        <PaginationRanges
+        
+        />
       </div>
     </div>
   );

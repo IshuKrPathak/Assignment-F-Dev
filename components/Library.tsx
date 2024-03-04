@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import spotify from "spotify";
 import Image from "next/image";
 import Link from "next/link";
-import { setOffset, setURI } from "redux/slices/player";
 import Head from "next/head";
 
 interface Track {
@@ -27,14 +26,7 @@ export default function Library() {
   const token = useAppSelector((state) => state.auth.access_token);
   const [savedTracks, setSavedTracks] = useState<Track[]>();
   const [savedAlbums, setSavedAlbums] = useState<Album[]>();
-  const device_id = useAppSelector((state) => state.player.device_id);
-  const dispatch = useAppDispatch();
 
-  async function play(uri: string, offset: number, position_ms: number) {
-    await spotify.playMusic(uri, offset - 1, position_ms, device_id);
-    dispatch(setURI(uri));
-    dispatch(setOffset(offset - 1));
-  }
 
   const fetchSavedTracks = async () => {
     const res = await spotify.getSavedTracks();
@@ -99,24 +91,11 @@ export default function Library() {
                       alt=""
                     />
                   </div>
-                  <div
-                    className="sub_item w-2/6 absolute bottom-0 right-0 mb-3 mr-3 invisible opacity-0"
-                   
-                  >
-                    <Image
-                      layout="responsive"
-                      height="64"
-                      width="64"
-                      src="/svgs/play.svg"
-                      alt=""
-                    />
-                  </div>
+                 
                 </div>
                 <div
                   className="text-sm text-white font-semibold mt-2 whitespace-nowrap overflow-hidden overflow-ellipsis hover:underline cursor-pointer"
-                  onClick={() => {
-                    play(track.uri, track.offset, 0);
-                  }}
+                 
                 >
                   {track.name}
                 </div>
@@ -158,13 +137,7 @@ export default function Library() {
                       className="sub_item w-2/6 absolute bottom-0 right-0 mb-3 mr-3 invisible opacity-0 hover:underline cursor-pointer"
                      
                     >
-                      <Image
-                        layout="responsive"
-                        height="64"
-                        width="64"
-                        src="/svgs/play.svg"
-                        alt=""
-                      />
+                      
                     </div>
                   </div>
                   <Link href={`/album/${album.id}`}>

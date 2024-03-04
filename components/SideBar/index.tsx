@@ -1,14 +1,16 @@
 import Logo from "./Logo";
 import Menu from "./Menu";
-import Playlist from "./Playlist";
 
 function SideBar() {
-
   return (
     <div className="w-60 h-full bg-sidebarBackground overflow-y-scroll no-scrollbar">
       <Logo />
-      <Menu/>
-      <Playlist />
+      <Menu />
+      <div className="p-2">
+        <div className="text-gray-500 my-3 mx-4 py-3 border-t border-gray-500 hover:text-white hover:cursor-pointer">
+          👩‍💻- Ishu Pathak
+        </div>
+      </div>
     </div>
   );
 }

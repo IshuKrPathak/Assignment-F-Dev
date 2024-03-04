@@ -22,15 +22,15 @@ export default function Home() {
       />
       <Topic
         title="Album"
-        sub_title="Our suggestions  for you"
+        sub_title="Our suggestions for you"
         tracks={[]}
         albums={context.newRelease}
         type="album"
         playlists={[]}
       />
       <Topic
-        title=" Playlist"
-        sub_title="Our  favourite playlists"
+        title=" Popular"
+        sub_title="Spotify's top pick"
         playlists={context.futuredPlaylists}
         tracks={[]}
         albums={[]}

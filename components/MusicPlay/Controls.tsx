@@ -1,4 +1,4 @@
-import Slider from "@material-ui/core/Slider";
+import Slider from "@mui/material/Slider";
 import { useAppSelector } from "hooks";
 
 export default function Controls() {

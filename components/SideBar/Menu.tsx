@@ -6,7 +6,7 @@ export default function Menu() {
   return (
     <div className="p-2">
       <Link href="/">
-        <div className="flex justify-start items-center text-white py-3 px-4 rounded hover:text-white hover:cursor-pointer ">
+        <div className="flex justify-start items-center text-white py-3 px-4 rounded hover:text-green-500  hover:cursor-pointer ">
           <div className="text-xl">
             <svg width="1em" height="1em" viewBox="0 0 1200 1200">
               <path
@@ -20,7 +20,7 @@ export default function Menu() {
       </Link>
 
       <Link href="/search" scroll={false}>
-        <div className="flex justify-start items-center text-white py-3 px-4 rounded hover:text-white hover:cursor-pointer ">
+        <div className="flex justify-start items-center text-white py-3 px-4 rounded hover:text-green-500 hover:cursor-pointer ">
           <div className="text-xl">
             <svg width="1em" height="1em" viewBox="0 0 24 24">
               <path
@@ -34,7 +34,7 @@ export default function Menu() {
       </Link>
 
       <Link href="/library">
-        <div className="flex justify-start items-center text-white py-3 px-4 rounded hover:text-white hover:cursor-pointer ">
+        <div className="flex justify-start items-center text-white py-3 px-4 rounded hover:text-green-500 hover:cursor-pointer ">
           <div className="text-xl">
             <svg width="1em" height="1em" viewBox="0 0 24 24">
               <path

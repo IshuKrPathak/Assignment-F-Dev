@@ -1,4 +1,4 @@
-import { debounce } from "@material-ui/core";
+import { debounce } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "hooks";
 import useProfile from "hooks/useProfile";
 import Image from "next/image";

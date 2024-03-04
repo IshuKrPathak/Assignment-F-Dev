@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "hooks";
 import spotify from "spotify";
 import { setOffset, setURI } from "redux/slices/player";
 import Head from "next/head";
+import PaginationRanges from "components/Pagination";
 
 interface Props {
   id: string;
@@ -48,7 +49,7 @@ export default function Playlist({ id }: Props) {
             <div className="w-1/7 text-center">S.no</div>
             <div>Title</div>
           </div>
-          <div className="w-3/12 2xl:w-4/12">ALBUM</div>
+          <div className="w-3/12 2xl:w-4/12">Album</div>
         </div>
         {playlist?.tracks.map((track, index) => (
           <div
@@ -83,6 +84,11 @@ export default function Playlist({ id }: Props) {
             <div className="w-3/12 2xl:w-4/12">{track.album.name}</div>
           </div>
         ))}
+
+        <PaginationRanges
+       
+         
+        />
       </div>
     </div>
   );
