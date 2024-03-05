@@ -2,10 +2,7 @@ import { Playlist } from "hooks/useFuturedPlaylists";
 import { RTrack } from "hooks/useRecentlyTracks";
 import Link from "next/link";
 import Image from "next/image";
-import spotify from "spotify";
-import { useAppDispatch, useAppSelector } from "hooks";
 import { Album } from "hooks/useNewRelease";
-import { setOffset, setURI } from "redux/slices/player";
 interface topicProps {
   title: string;
   sub_title: string;

@@ -1,9 +1,8 @@
 import usePlaylist from "hooks/usePlaylist";
 import Image from "next/image";
-import { useAppDispatch, useAppSelector } from "hooks";
-import spotify from "spotify";
-import { setOffset, setURI } from "redux/slices/player";
 import Head from "next/head";
+
+import React from "react";
 import PaginationRanges from "components/Pagination";
 
 interface Props {
@@ -12,6 +11,15 @@ interface Props {
 
 export default function Playlist({ id }: Props) {
   let playlist = usePlaylist(id);
+  const [page, setPage] = React.useState(1);
+
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
+
+  const pageSize = 10;
+  const startIndex = (page - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
 
   return (
     <div className="pb-10">
@@ -42,6 +50,7 @@ export default function Playlist({ id }: Props) {
           </div>
         </div>
       </div>
+      
 
       <div className="text-gray-400 mx-8 text-sm">
         <div className="w-full flex pr-8 py-4 border-b border-gray-500">
@@ -51,7 +60,7 @@ export default function Playlist({ id }: Props) {
           </div>
           <div className="w-3/12 2xl:w-4/12">Album</div>
         </div>
-        {playlist?.tracks.map((track, index) => (
+        {playlist?.tracks.slice(startIndex, endIndex).map((track, index) => (
           <div
             key={track.id}
             className="w-full flex items-center pr-8 py-2 my-2 hover:bg-white hover:bg-opacity-10 rounded"
@@ -84,11 +93,14 @@ export default function Playlist({ id }: Props) {
             <div className="w-3/12 2xl:w-4/12">{track.album.name}</div>
           </div>
         ))}
-
-        <PaginationRanges
-       
-         
-        />
+        <div className="flex justify-center mt-4">
+          <PaginationRanges
+            count={Math.ceil(playlist?.tracks.length! / pageSize)}
+            defaultPage={1}
+            onChange={handleChange}
+            siblingCount={10}
+          />
+        </div>
       </div>
     </div>
   );

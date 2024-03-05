@@ -37,7 +37,9 @@ export default function Library() {
       singleTrack.artist = track.track.artists
         .map((artist: { id: string; name: string }) => artist.name)
         .join(", ");
-      singleTrack.image = track.track.album.images[0].url;
+
+        // commented  - shows error in images fetching
+      // singleTrack.image = track.track.album.images[0].url;
       singleTrack.name = track.track.name;
       singleTrack.offset = track.track.track_number;
       singleTrack.uri = track.track.album.uri;

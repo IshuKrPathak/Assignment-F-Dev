@@ -3,6 +3,8 @@ import Topic from "./Topic";
 import Reac, { useContext } from "react";
 import HomeContext from "context";
 import Head from "next/head"
+import PaginationRanges from "components/Pagination";
+
 
 export default function Home() {
   const context = useContext(HomeContext);

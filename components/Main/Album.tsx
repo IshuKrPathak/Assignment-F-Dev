@@ -4,6 +4,7 @@ import Image from "next/image";
 import { msToTime } from "utils";
 import Head from "next/head";
 import PaginationRanges from "components/Pagination";
+import { useState } from "react";
 
 interface Props {
   id: string;
@@ -11,6 +12,15 @@ interface Props {
 
 export default function Album({ id }: Props) {
   let album = useAlbum(id);
+  const [page, setPage] = useState(1);
+
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
+
+  const pageSize = 10;
+  const startIndex = (page - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
 
   return (
     <div className="pb-10">
@@ -43,30 +53,19 @@ export default function Album({ id }: Props) {
           </div>
         </div>
       </div>
-
+      {/* Album details rendering */}
       <div className="text-gray-400 mx-8 text-sm">
-        <div className="w-full flex pr-8 py-4 border-b border-gray-500">
-          <div className="w-5/12 flex">
-            <div className="w-1/7 text-center">#</div>
-            <div>Album</div>
-          </div>
-          <div className="w-7/12 flex justify-end">
-            <svg width="1em" height="1em" viewBox="0 0 256 256">
-              <path
-                d="M128 230a102 102 0 1 1 102-102a102.115 102.115 0 0 1-102 102zm0-192a90 90 0 1 0 90 90a90.102 90.102 0 0 0-90-90zm62 90a6 6 0 0 0-6-6h-50V72a6 6 0 0 0-12 0v56a6 6 0 0 0 6 6h56a6 6 0 0 0 6-6z"
-                fill="currentColor"
-              ></path>
-            </svg>
-          </div>
-        </div>
-        {album?.tracks.map((track, index) => (
+        {/* Tracks list */}
+        {album?.tracks.slice(startIndex, endIndex).map((track, index) => (
           <div
             key={track.id}
             className="w-full flex items-center pr-8 py-2 my-2 hover:bg-white hover:bg-opacity-10 rounded"
           >
+            {/* Track number */}
             <div className="w-5/12 flex items-center">
               <div className="w-1/7 text-center">{index + 1}</div>
 
+              {/* Track details */}
               <div className="w-6/7">
                 <div className="text-white text-base cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis">
                   {track.name}
@@ -76,14 +75,21 @@ export default function Album({ id }: Props) {
                 </div>
               </div>
             </div>
+            {/* Track duration */}
             <div className="w-7/12 text-right">
               {msToTime(track.duration_ms)}
             </div>
           </div>
         ))}
-        <PaginationRanges
-        
-        />
+        {/* Pagination component */}
+        <div className="flex justify-center mt-4">
+          <PaginationRanges
+            count={Math.ceil(album?.tracks.length! / pageSize)}
+            defaultPage={1}
+            onChange={handleChange}
+            siblingCount={10}
+          />
+        </div>
       </div>
     </div>
   );

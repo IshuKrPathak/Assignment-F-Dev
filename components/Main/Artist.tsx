@@ -4,6 +4,9 @@ import useArtistTopTracks from "hooks/useArtistTopTracks";
 import Image from "next/image";
 import { msToTime } from "utils";
 import Head from "next/head";
+import PaginationRanges from "components/Pagination";
+import { useState } from "react";
+
 interface Props {
   id: string;
 }
@@ -11,6 +14,15 @@ interface Props {
 export default function Artist({ id }: Props) {
   const profile = useArtist(id);
   const topTracks = useArtistTopTracks(id);
+  const [page, setPage] = useState(1);
+
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
+
+  const pageSize = 4;
+  const startIndex = (page - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
 
   return (
     <div className="px-10 pb-10">
@@ -40,8 +52,10 @@ export default function Artist({ id }: Props) {
         </div>
       </div>
 
-      <div className="text-white mt-10 mb-6 text-3xl font-bold">Popular</div>
-      {topTracks?.map((track, index) => (
+      <div className="text-white mt-10 mb-6 text-3xl font-bold">
+        Top 10 Songs
+      </div>
+      {topTracks?.slice(startIndex, endIndex).map((track, index) => (
         <div
           key={track.id}
           className="text-gray-400 w-8/12 hover:bg-white hover:bg-opacity-10 py-2 px-4 rounded"
@@ -70,6 +84,14 @@ export default function Artist({ id }: Props) {
           </div>
         </div>
       ))}
+      <div className="flex justify-center mt-4">
+        <PaginationRanges
+          count={Math.ceil(topTracks?.length! / pageSize)} // Corrected variable usage
+          defaultPage={1}
+          onChange={handleChange}
+          siblingCount={10}
+        />
+      </div>
     </div>
   );
 }

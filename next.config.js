@@ -13,6 +13,7 @@ module.exports = {
       "seeded-session-images.scdn.co",
       "scontent-hkt1-2.xx.fbcdn.net",
       "image-cdn-ak.spotifycdn.com",
+      "dailymix-images.scdn.co" ,
       "*.scdn.co",
       "wrapped-images.spotifycdn.com",
       "seed-mix-image.spotifycdn.com",
